@@ -17,9 +17,11 @@ public class Main {
         LocalDateTime endTime = null;
         boolean started = false;
 
-        String[] errorStringStart = new String[2];
+        String[] errorStringStart = new String[4];
         errorStringStart[0] = "System.Net.Sockets.Socket.Bind";
         errorStringStart[1] = "#3418";
+        errorStringStart[2] = "Problem";
+        errorStringStart[3] = "ErrorFatality";
 
         String[] errorStringFixed = new String[2];
         errorStringFixed[0] = "w CommunicationProtocol.CommunicationManager.Initialise(String ipAddress, UInt32 portNo)";
@@ -30,32 +32,34 @@ public class Main {
             res = el;
         }
 
+        String currentError = "";
+
         while (true) {
             if ((line = reader.readLine()) != null) {
                 for(String el : errorStringStart) {
                     if (line.contains(el)) {
                         startTime = LocalDateTime.now();
                         started = true;
+                        currentError = el;
                     } else if (line.contains(res)) {
                         if (started) {
                             endTime = LocalDateTime.now();
                             Duration duration = Duration.between(startTime, endTime);
-                            String time = String.format("Error: " + el + "\nTime start: %s, Time end: %s, Diff: %s\n",
+                            String time = String.format("Error: " + currentError + "Time start: %s, Time end: %s, Diff: %s\n",
                                     startTime.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME),
                                     endTime.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME),
-                                    formatDuration(duration));
+                                    formatDuration(duration) + "\n");
                             content.append(time);
                             started = false;
                         }
                     }
                 }
             } else {
-                Thread.sleep(1000); // чекати 1 секунду, якщо файл поки що порожній
+                Thread.sleep(1000);
             }
 
-            // записувати вміст файлу кожні 10 помилок
             if (content.length() >= 1) {
-                FileWriter save = new FileWriter("src\\ErrorLog\\Error.txt", true); // додати до кінця файлу
+                FileWriter save = new FileWriter("src\\ErrorLog\\Error.txt", true);
                 save.write(content.toString());
                 save.close();
                 content = new StringBuilder();
