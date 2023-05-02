@@ -45,7 +45,7 @@ public class Main {
                         if (started) {
                             endTime = LocalDateTime.now();
                             Duration duration = Duration.between(startTime, endTime);
-                            String time = String.format("Error: \n" + currentError + "Time start: %s, Time end: %s, Diff: %s\n",
+                            String time = String.format("Error: " + currentError + "\nTime start: %s, Time end: %s, Diff: %s\n",
                                     startTime.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME),
                                     endTime.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME),
                                     formatDuration(duration) + "\n");
