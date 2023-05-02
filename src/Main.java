@@ -17,21 +17,36 @@ public class Main {
         LocalDateTime endTime = null;
         boolean started = false;
 
+        String[] errorStringStart = new String[2];
+        errorStringStart[0] = "System.Net.Sockets.Socket.Bind";
+        errorStringStart[1] = "#3418";
+
+        String[] errorStringFixed = new String[2];
+        errorStringFixed[0] = "w CommunicationProtocol.CommunicationManager.Initialise(String ipAddress, UInt32 portNo)";
+        errorStringFixed[1] = "Fixed";
+
+        String res = "";
+        for(String el : errorStringFixed) {
+            res = el;
+        }
+
         while (true) {
             if ((line = reader.readLine()) != null) {
-                if (line.contains("System.Net.Sockets.Socket.Bind") || line.contains("#3418")) {
-                    startTime = LocalDateTime.now();
-                    started = true;
-                } else if (line.contains("w CommunicationProtocol.CommunicationManager.Initialise(String ipAddress, UInt32 portNo)") || line.contains("Fixed")) {
-                    if (started) {
-                        endTime = LocalDateTime.now();
-                        Duration duration = Duration.between(startTime, endTime);
-                        String time = String.format("Error: " + line + "\nTime start: %s, Time end: %s, Diff: %s\n",
-                                startTime.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME),
-                                endTime.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME),
-                                formatDuration(duration));
-                        content.append(time);
-                        started = false;
+                for(String el : errorStringStart) {
+                    if (line.contains(el)) {
+                        startTime = LocalDateTime.now();
+                        started = true;
+                    } else if (line.contains(res)) {
+                        if (started) {
+                            endTime = LocalDateTime.now();
+                            Duration duration = Duration.between(startTime, endTime);
+                            String time = String.format("Error: " + el + "\nTime start: %s, Time end: %s, Diff: %s\n",
+                                    startTime.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME),
+                                    endTime.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME),
+                                    formatDuration(duration));
+                            content.append(time);
+                            started = false;
+                        }
                     }
                 }
             } else {
