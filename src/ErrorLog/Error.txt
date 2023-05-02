@@ -1,0 +1,10 @@
+Error:    w CommunicationProtocol.CommunicationManager.Initialise(String ipAddress, UInt32 portNo)
+Time start: 2023-05-02T09:24:11.8006604, Time end: 2023-05-02T09:24:11.8026597, Diff: 00:00:00
+Error: Fixed
+Time start: 2023-05-02T09:24:11.8335754, Time end: 2023-05-02T09:24:11.8335754, Diff: 00:00:00
+Error: w CommunicationProtocol.CommunicationManager.Initialise(String ipAddress, UInt32 portNo)
+Time start: 2023-05-02T09:24:11.8395566, Time end: 2023-05-02T09:24:11.8395566, Diff: 00:00:00
+Error: Fixed
+Time start: 2023-05-02T09:24:11.8405543, Time end: 2023-05-02T09:24:11.8405543, Diff: 00:00:00
+Error: w CommunicationProtocol.CommunicationManager.Initialise(String ipAddress, UInt32 portNo)
+Time start: 2023-05-02T09:24:11.8425492, Time end: 2023-05-02T09:24:11.8425492, Diff: 00:00:00
