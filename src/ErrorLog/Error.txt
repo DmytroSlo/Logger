@@ -1,6 +1,12 @@
-Error: System.Net.Sockets.Socket.Bind
-Time start: 2023-05-02T12:57:58.5284436, Time end: 2023-05-02T12:58:31.8780615, Diff: 00:00:33
-
 Error: #3418
-Time start: 2023-05-02T12:58:35.943434, Time end: 2023-05-02T12:58:57.1776006, Diff: 00:00:21
+Time start: 2023-05-04T12:36:19.9636908, Time end: 2023-05-04T12:36:24.0026341, Diff: 00:00:04
+
+Error: Problem
+Time start: 2023-05-04T12:36:34.1194927, Time end: 2023-05-04T12:36:38.1619891, Diff: 00:00:04
+
+Error: ErrorFatality
+Time start: 2023-05-04T12:36:49.2532501, Time end: 2023-05-04T12:36:49.2532501, Diff: 00:00:00
+
+Error: Fataliti Error
+Time start: 2023-05-04T12:37:02.4019852, Time end: 2023-05-04T12:37:10.4790611, Diff: 00:00:08
 

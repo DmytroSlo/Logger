@@ -5,7 +5,7 @@ import java.time.format.DateTimeFormatter;
 
 public class Main {
     public static void main(String[] args) throws IOException, InterruptedException {
-        String logFileRead = "C:\\Program Files (x86)\\Sky\\ETHOS\\Logs\\ComDLL_ErrorLog.txt"; // Adres do pliku z logami
+        String logFileRead = "C:\\MyProgram\\LogError.txt"; // Adres do pliku z logami który potrzebnie przeczytać
 
         File file = new File(logFileRead);
         BufferedReader reader = new BufferedReader(new FileReader(file));
@@ -17,34 +17,32 @@ public class Main {
         LocalDateTime endTime = null;
         boolean started = false;
 
-        String[] errorStringStart = {"System.Net.Sockets.Socket.Bind", "#3418", "Problem", "ErrorFatality"}; // Nazwa błędu którze powstają
+        String[] errorStringStart = {"#3418", "Problem", "ErrorFatality", "Fataliti Error"}; // Nazwa błędu którze powstają
 
         String[] errorStringFixed = {"Done", "Fixed"}; // Kluczowi slowa po zakonczeniu problemy
 
-        String res = "";
-        for(String el : errorStringFixed) {
-            res = el;
-        }
 
         String currentError = "";
 
         while (true) {
             if ((line = reader.readLine()) != null) {
                 for(String el : errorStringStart) {
-                    if (line.contains(el)) {
-                        startTime = LocalDateTime.now();
-                        started = true;
-                        currentError = el;
-                    } else if (line.contains(res)) {
-                        if (started) {
-                            endTime = LocalDateTime.now();
-                            Duration duration = Duration.between(startTime, endTime);
-                            String time = String.format("Error: " + currentError + "\nTime start: %s, Time end: %s, Diff: %s\n",
-                                    startTime.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME),
-                                    endTime.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME),
-                                    formatDuration(duration) + "\n");
-                            content.append(time);
-                            started = false;
+                    for(String fix : errorStringFixed) {
+                        if (line.contains(el)) {
+                            startTime = LocalDateTime.now();
+                            started = true;
+                            currentError = el;
+                        } else if (line.contains(fix)) {
+                            if (started) {
+                                endTime = LocalDateTime.now();
+                                Duration duration = Duration.between(startTime, endTime);
+                                String time = String.format("Error: " + currentError + "\nTime start: %s, Time end: %s, Diff: %s\n",
+                                        startTime.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME),
+                                        endTime.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME),
+                                        formatDuration(duration) + "\n");
+                                content.append(time);
+                                started = false;
+                            }
                         }
                     }
                 }
@@ -53,7 +51,7 @@ public class Main {
             }
 
             if (content.length() >= 1) {
-                FileWriter save = new FileWriter("src\\ErrorLog\\Error.txt", true);
+                FileWriter save = new FileWriter("src\\ErrorLog\\Error.txt", true); // Miejsce gdzie będzie zapisywać log
                 save.write(content.toString());
                 save.close();
                 content = new StringBuilder();
