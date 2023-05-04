@@ -5,7 +5,7 @@ import java.time.format.DateTimeFormatter;
 
 public class Main {
     public static void main(String[] args) throws IOException, InterruptedException {
-        String logFileRead = "C:\\Program Files (x86)\\Sky\\ETHOS\\Logs\\ComDLL_ErrorLog.txt";
+        String logFileRead = "C:\\Program Files (x86)\\Sky\\ETHOS\\Logs\\ComDLL_ErrorLog.txt"; // Adres do pliku z logami
 
         File file = new File(logFileRead);
         BufferedReader reader = new BufferedReader(new FileReader(file));
@@ -17,15 +17,9 @@ public class Main {
         LocalDateTime endTime = null;
         boolean started = false;
 
-        String[] errorStringStart = new String[4];
-        errorStringStart[0] = "System.Net.Sockets.Socket.Bind";
-        errorStringStart[1] = "#3418";
-        errorStringStart[2] = "Problem";
-        errorStringStart[3] = "ErrorFatality";
+        String[] errorStringStart = {"System.Net.Sockets.Socket.Bind", "#3418", "Problem", "ErrorFatality"}; // Nazwa błędu którze powstają
 
-        String[] errorStringFixed = new String[2];
-        errorStringFixed[0] = "w CommunicationProtocol.CommunicationManager.Initialise(String ipAddress, UInt32 portNo)";
-        errorStringFixed[1] = "Fixed";
+        String[] errorStringFixed = {"Done", "Fixed"}; // Kluczowi slowa po zakonczeniu problemy
 
         String res = "";
         for(String el : errorStringFixed) {

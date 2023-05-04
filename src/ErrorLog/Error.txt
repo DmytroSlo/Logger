@@ -1,6 +1,6 @@
-Error: 
-System.Net.Sockets.Socket.BindTime start: 2023-05-02T12:52:45.0776108, Time end: 2023-05-02T12:52:52.155896, Diff: 00:00:07
+Error: System.Net.Sockets.Socket.Bind
+Time start: 2023-05-02T12:57:58.5284436, Time end: 2023-05-02T12:58:31.8780615, Diff: 00:00:33
 
-Error: 
-#3418Time start: 2023-05-02T12:53:05.319667, Time end: 2023-05-02T12:53:20.4435697, Diff: 00:00:15
+Error: #3418
+Time start: 2023-05-02T12:58:35.943434, Time end: 2023-05-02T12:58:57.1776006, Diff: 00:00:21
 
